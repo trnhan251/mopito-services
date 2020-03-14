@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDto, userEntity);
 
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userEntity.setCreatedOn(new Date());
 
         UserEntity storedUserEntity = userRepository.save(userEntity);
         UserDto returnValue = new UserDto();

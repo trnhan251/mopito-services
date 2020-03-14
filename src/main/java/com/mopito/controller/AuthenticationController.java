@@ -55,7 +55,9 @@ public class AuthenticationController {
         BeanUtils.copyProperties(userRequest, userDto);
 
         UserDto createdUser = userService.createUser(userDto);
-        return ResponseEntity.ok().body(createdUser.getUsername());
+        AuthenticationResponse authenticationResponse = getAuthenticationResponse(createdUser.getUsername());
+
+        return ResponseEntity.ok().body(authenticationResponse);
     }
 
     private AuthenticationResponse getAuthenticationResponse(String username) {
