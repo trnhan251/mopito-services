@@ -5,11 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/welcome")
+@RequestMapping("/")
 public class WelcomeController {
 
     @GetMapping
     public String welcome() {
         return "Welcome to Mopito API. Server is running on PORT 8080";
+    }
+
+    @GetMapping("/welcome")
+    public String welcomeSecured() {
+        return "Testing security";
     }
 }
