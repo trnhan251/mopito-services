@@ -1,6 +1,6 @@
 package com.mopito.controller;
 
-import com.mopito.dto.UserDto;
+import com.mopito.model.dto.UserDto;
 import com.mopito.model.response.UserResponse;
 import com.mopito.service.UserService;
 import org.modelmapper.ModelMapper;

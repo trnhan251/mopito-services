@@ -1,11 +1,10 @@
 package com.mopito.service.impl;
 
-import com.mopito.dto.UserDto;
-import com.mopito.entity.User;
+import com.mopito.model.dto.UserDto;
+import com.mopito.model.entity.User;
 import com.mopito.repository.UserRepository;
 import com.mopito.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,26 +30,19 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Record already exists");
         }
 
-        User user = new User();
-        BeanUtils.copyProperties(userDto, user);
+        User user = convertToEntity(userDto);
 
         user.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         user.setCreatedOn(new Date());
 
         User storedUser = userRepository.save(user);
-        UserDto returnValue = new UserDto();
-        BeanUtils.copyProperties(storedUser, returnValue);
-        return returnValue;
+        return convertToDto(storedUser);
     }
 
     @Override
     public UserDto findWithUsername(String username) {
         User user = userRepository.findByUsername(username);
-        UserDto userDto = new UserDto();
-
-        BeanUtils.copyProperties(user, userDto);
-
-        return userDto;
+        return convertToDto(user);
     }
 
     @Override
@@ -61,5 +53,9 @@ public class UserServiceImpl implements UserService {
 
     private UserDto convertToDto(User user) {
         return modelMapper.map(user, UserDto.class);
+    }
+
+    private User convertToEntity(UserDto userDto) {
+        return modelMapper.map(userDto, User.class);
     }
 }

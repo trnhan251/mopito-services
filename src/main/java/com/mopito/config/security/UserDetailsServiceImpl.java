@@ -1,6 +1,6 @@
-package com.mopito.security;
+package com.mopito.config.security;
 
-import com.mopito.entity.User;
+import com.mopito.model.entity.User;
 import com.mopito.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
-package com.mopito.security;
+package com.mopito.config.security;
 
-import com.mopito.entity.User;
+import com.mopito.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

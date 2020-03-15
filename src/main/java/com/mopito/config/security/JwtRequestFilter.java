@@ -1,4 +1,4 @@
-package com.mopito.security;
+package com.mopito.config.security;
 
 import com.mopito.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;

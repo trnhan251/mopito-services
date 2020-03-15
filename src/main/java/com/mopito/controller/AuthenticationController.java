@@ -1,6 +1,6 @@
 package com.mopito.controller;
 
-import com.mopito.dto.UserDto;
+import com.mopito.model.dto.UserDto;
 import com.mopito.model.request.AuthenticationRequest;
 import com.mopito.model.request.UserRequest;
 import com.mopito.model.response.AuthenticationResponse;

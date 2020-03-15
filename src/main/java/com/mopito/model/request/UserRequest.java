@@ -1,6 +1,6 @@
 package com.mopito.model.request;
 
-import com.mopito.enums.UserRole;
+import com.mopito.model.enums.UserRole;
 import lombok.Getter;
 import lombok.ToString;
 

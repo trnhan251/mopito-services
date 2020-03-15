@@ -1,6 +1,6 @@
 package com.mopito.model.response;
 
-import com.mopito.enums.UserRole;
+import com.mopito.model.enums.UserRole;
 import lombok.Setter;
 
 @Setter

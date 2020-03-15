@@ -1,6 +1,6 @@
 package com.mopito.repository;
 
-import com.mopito.entity.User;
+import com.mopito.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
