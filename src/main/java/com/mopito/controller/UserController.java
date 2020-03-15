@@ -16,11 +16,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ModelMapper mapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public UserController(ModelMapper mapper, UserService userService) {
+        this.mapper = mapper;
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<UserResponse> getAllUsers() {
@@ -28,6 +30,6 @@ public class UserController {
     }
 
     private UserResponse convertToUserResponse(UserDto userDto) {
-        return modelMapper.map(userDto, UserResponse.class);
+        return this.mapper.map(userDto, UserResponse.class);
     }
 }

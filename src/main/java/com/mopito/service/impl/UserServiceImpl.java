@@ -15,14 +15,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder bCryptPasswordEncoder;
+    private final ModelMapper mapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder, ModelMapper mapper) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.mapper = mapper;
+    }
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -52,10 +54,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserDto convertToDto(User user) {
-        return modelMapper.map(user, UserDto.class);
+        return this.mapper.map(user, UserDto.class);
     }
 
     private User convertToEntity(UserDto userDto) {
-        return modelMapper.map(userDto, User.class);
+        return this.mapper.map(userDto, User.class);
     }
 }
