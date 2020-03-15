@@ -1,6 +1,6 @@
-package com.mopito.security;
+package com.mopito.config.security;
 
-import com.mopito.entity.UserEntity;
+import com.mopito.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,10 +17,10 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private List<GrantedAuthority> authorityList;
 
-    public UserDetailsImpl(UserEntity userEntity) {
-        this.username = userEntity.getUsername();
-        this.password = userEntity.getEncryptedPassword();
-        this.authorityList = Arrays.stream(userEntity.getRole().toString().split(","))
+    public UserDetailsImpl(User user) {
+        this.username = user.getUsername();
+        this.password = user.getEncryptedPassword();
+        this.authorityList = Arrays.stream(user.getRole().toString().split(","))
                 .map(s -> "ROLE_" + s)
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }

@@ -1,4 +1,4 @@
-package com.mopito.enums;
+package com.mopito.model.enums;
 
 public enum UserRole {
     USER, ADMIN;

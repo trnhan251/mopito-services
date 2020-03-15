@@ -1,6 +1,6 @@
-package com.mopito.security;
+package com.mopito.config.security;
 
-import com.mopito.entity.UserEntity;
+import com.mopito.model.entity.User;
 import com.mopito.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +16,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username);
-        if (userEntity == null) throw new UsernameNotFoundException("Username + " + username + " + not found!");
-        return new UserDetailsImpl(userEntity);
+        User user = userRepository.findByUsername(username);
+        if (user == null) throw new UsernameNotFoundException("Username + " + username + " + not found!");
+        return new UserDetailsImpl(user);
     }
 }

@@ -1,6 +1,6 @@
 package com.mopito.service;
 
-import com.mopito.dto.UserDto;
+import com.mopito.model.dto.UserDto;
 
 import java.util.List;
 

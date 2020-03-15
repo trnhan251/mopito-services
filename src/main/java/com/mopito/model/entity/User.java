@@ -1,11 +1,12 @@
-package com.mopito.entity;
+package com.mopito.model.entity;
 
-import com.mopito.enums.UserRole;
+import com.mopito.model.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -13,7 +14,8 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class UserEntity {
+public class User implements Serializable {
+    private static final long serialVersionUID = -6418843088092967733L;
     @Id
     @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

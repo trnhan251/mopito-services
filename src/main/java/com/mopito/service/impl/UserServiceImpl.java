@@ -1,11 +1,10 @@
 package com.mopito.service.impl;
 
-import com.mopito.dto.UserDto;
-import com.mopito.entity.UserEntity;
+import com.mopito.model.dto.UserDto;
+import com.mopito.model.entity.User;
 import com.mopito.repository.UserRepository;
 import com.mopito.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,35 +30,32 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Record already exists");
         }
 
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(userDto, userEntity);
+        User user = convertToEntity(userDto);
 
-        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        userEntity.setCreatedOn(new Date());
+        user.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        user.setCreatedOn(new Date());
 
-        UserEntity storedUserEntity = userRepository.save(userEntity);
-        UserDto returnValue = new UserDto();
-        BeanUtils.copyProperties(storedUserEntity, returnValue);
-        return returnValue;
+        User storedUser = userRepository.save(user);
+        return convertToDto(storedUser);
     }
 
     @Override
     public UserDto findWithUsername(String username) {
-        UserEntity userEntity = userRepository.findByUsername(username);
-        UserDto userDto = new UserDto();
-
-        BeanUtils.copyProperties(userEntity, userDto);
-
-        return userDto;
+        User user = userRepository.findByUsername(username);
+        return convertToDto(user);
     }
 
     @Override
     public List<UserDto> findAllUsers() {
-        List<UserEntity> userEntityList = userRepository.findAll();
-        return userEntityList.stream().map(this::convertToDto).collect(Collectors.toList());
+        List<User> userList = userRepository.findAll();
+        return userList.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    private UserDto convertToDto(UserEntity userEntity) {
-        return modelMapper.map(userEntity, UserDto.class);
+    private UserDto convertToDto(User user) {
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    private User convertToEntity(UserDto userDto) {
+        return modelMapper.map(userDto, User.class);
     }
 }
