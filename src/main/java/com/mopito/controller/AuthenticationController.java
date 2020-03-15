@@ -45,7 +45,10 @@ public class AuthenticationController {
             throw new Exception("Incorrect username and password!");
         }
 
-        AuthenticationResponse authenticationResponse = getAuthenticationResponse(authenticationRequest.getUsername());
+        String username = authenticationRequest.getUsername();
+        AuthenticationResponse authenticationResponse = getAuthenticationResponse(username);
+        UserDto userDto = userService.findWithUsername(username);
+        authenticationResponse.setUserId(userDto.getId());
         return ResponseEntity.ok().body(authenticationResponse);
     }
 
@@ -56,7 +59,7 @@ public class AuthenticationController {
 
         UserDto createdUser = userService.createUser(userDto);
         AuthenticationResponse authenticationResponse = getAuthenticationResponse(createdUser.getUsername());
-
+        authenticationResponse.setUserId(createdUser.getId());
         return ResponseEntity.ok().body(authenticationResponse);
     }
 

@@ -20,7 +20,8 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(UserEntity userEntity) {
         this.username = userEntity.getUsername();
         this.password = userEntity.getEncryptedPassword();
-        this.authorityList = Arrays.stream(userEntity.getRole().toString().split(""))
+        this.authorityList = Arrays.stream(userEntity.getRole().toString().split(","))
+                .map(s -> "ROLE_" + s)
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
