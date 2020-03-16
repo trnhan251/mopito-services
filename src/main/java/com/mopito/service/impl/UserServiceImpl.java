@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private ModelMapper mapper;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -52,10 +52,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserDto convertToDto(User user) {
-        return modelMapper.map(user, UserDto.class);
+        return mapper.map(user, UserDto.class);
     }
 
     private User convertToEntity(UserDto userDto) {
-        return modelMapper.map(userDto, User.class);
+        return mapper.map(userDto, User.class);
     }
 }
