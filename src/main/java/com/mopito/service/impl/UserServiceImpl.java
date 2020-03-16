@@ -58,6 +58,6 @@ public class UserServiceImpl implements UserService {
 
 
     private User convertToEntity(UserDto userDto) {
-        return mapper.map(userDto, User.class);
+        return this.mapper.map(userDto, User.class);
     }
 }
