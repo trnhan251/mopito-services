@@ -5,7 +5,6 @@ import com.mopito.model.entity.User;
 import com.mopito.repository.UserRepository;
 import com.mopito.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +56,8 @@ public class UserServiceImpl implements UserService {
         return this.mapper.map(user, UserDto.class);
     }
 
+
     private User convertToEntity(UserDto userDto) {
-        return this.mapper.map(userDto, User.class);
+        return mapper.map(userDto, User.class);
     }
 }
