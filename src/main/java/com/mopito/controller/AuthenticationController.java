@@ -48,7 +48,7 @@ public class AuthenticationController {
         String username = authenticationRequest.getUsername();
         AuthenticationResponse authenticationResponse = getAuthenticationResponse(username);
         UserDto userDto = userService.findWithUsername(username);
-        authenticationResponse.setUserId(userDto.getId());
+        authenticationResponse.setUsername(userDto.getUsername());
         return ResponseEntity.ok().body(authenticationResponse);
     }
 
@@ -59,7 +59,7 @@ public class AuthenticationController {
 
         UserDto createdUser = userService.createUser(userDto);
         AuthenticationResponse authenticationResponse = getAuthenticationResponse(createdUser.getUsername());
-        authenticationResponse.setUserId(createdUser.getId());
+        authenticationResponse.setUsername(createdUser.getUsername());
         return ResponseEntity.ok().body(authenticationResponse);
     }
 

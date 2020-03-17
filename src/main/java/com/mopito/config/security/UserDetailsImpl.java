@@ -1,6 +1,7 @@
 package com.mopito.config.security;
 
 import com.mopito.model.entity.User;
+import com.mopito.model.enums.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +16,13 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = -7047893502147412182L;
     private String username;
     private String password;
+    private UserRole role;
     private List<GrantedAuthority> authorityList;
 
     public UserDetailsImpl(User user) {
         this.username = user.getUsername();
         this.password = user.getEncryptedPassword();
+        this.role = user.getRole();
         this.authorityList = Arrays.stream(user.getRole().toString().split(","))
                 .map(s -> "ROLE_" + s)
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
@@ -58,5 +61,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserRole getRole() {
+        return role;
     }
 }

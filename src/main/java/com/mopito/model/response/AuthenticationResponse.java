@@ -6,6 +6,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AuthenticationResponse {
-    private Long userId;
+    private String username;
     private String token;
 }

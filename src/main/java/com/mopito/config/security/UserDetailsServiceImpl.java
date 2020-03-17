@@ -1,5 +1,6 @@
 package com.mopito.config.security;
 
+import com.mopito.exception.RecordNotFoundException;
 import com.mopito.model.entity.User;
 import com.mopito.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if (user == null) throw new UsernameNotFoundException("Username + " + username + " + not found!");
+        if (user == null) throw new RecordNotFoundException("Username " + username + " not found!");
         return new UserDetailsImpl(user);
     }
 }
